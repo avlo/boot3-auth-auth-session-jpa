@@ -47,7 +47,25 @@ public class AppUserAuthUserService {
 		return appUserAuthUserRepository.findByAuthUserName(authUserDetails.getUsername()).get();
 	}
 
-	public List<AppUserAuthUser> findAllAppUsers() {
+	public List<AppUserAuthUser> getAllAppUsersMappedAuthUsers() {
 		return appUserAuthUserRepository.findAll();
+	}
+
+	/**
+	 * Users for view display
+	 * @return list of all app users
+	 */
+	public List<AppUserDto> getAllAppUsersAsDto() {
+		return convertAppUserToDto(getAllAppUsersMappedAuthUsers());
+	}
+
+	private List<AppUserDto> convertAppUserToDto(List<AppUserAuthUser> users) {
+		return users.stream().map((user) -> mapToUserDto(user)).collect(Collectors.toList());
+	}
+
+	private AppUserDto mapToUserDto(AppUserAuthUser appUserAuthUser) {
+		AppUserDto userDto = new AppUserDto();
+		userDto.setUsername(appUserAuthUser.getAuthUserName());
+		return userDto;
 	}
 }

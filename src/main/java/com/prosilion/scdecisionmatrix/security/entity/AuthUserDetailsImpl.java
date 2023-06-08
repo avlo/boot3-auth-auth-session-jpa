@@ -8,6 +8,13 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
+/**
+ * Authentication & authorization user, directly bound to Spring Security.
+ * If you'd like a customizable user, use:
+ * @see com.prosilion.scdecisionmatrix.entity.AppUser
+ *
+ * Note: Spring Security using JPA maps this class to "USERS" DB table.
+ */
 @Component
 @Scope("session")
 public class AuthUserDetailsImpl implements AuthUserDetails, Serializable {

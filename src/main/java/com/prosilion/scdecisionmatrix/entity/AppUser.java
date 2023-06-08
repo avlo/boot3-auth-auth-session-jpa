@@ -10,7 +10,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * Extendable/customizable user, bound to Spring Security Authentication and Authorization
+ * Extendable/customizable user, indirectly bound to Spring Security Authentication
+ * and Authorization user via join service/table:
  * @see com.prosilion.scdecisionmatrix.service.AppUserAuthUserService
  */
 @Getter
