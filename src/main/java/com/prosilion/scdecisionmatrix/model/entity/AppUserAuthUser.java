@@ -1,8 +1,11 @@
-package com.prosilion.scdecisionmatrix.entity;
-
-import jakarta.persistence.*;
+package com.prosilion.scdecisionmatrix.model.entity;
 
 import java.io.Serializable;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;

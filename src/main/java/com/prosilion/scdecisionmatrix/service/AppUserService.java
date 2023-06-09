@@ -1,6 +1,6 @@
 package com.prosilion.scdecisionmatrix.service;
 
-import com.prosilion.scdecisionmatrix.entity.AppUser;
+import com.prosilion.scdecisionmatrix.model.entity.AppUser;
 import com.prosilion.scdecisionmatrix.repository.AppUserRepository;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;

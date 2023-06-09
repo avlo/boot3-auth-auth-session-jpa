@@ -1,4 +1,4 @@
-package com.prosilion.scdecisionmatrix.dto;
+package com.prosilion.scdecisionmatrix.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package com.prosilion.scdecisionmatrix.security.entity;
+package com.prosilion.scdecisionmatrix.model.entity.security;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 /**
  * Authentication & authorization user, directly bound to Spring Security.
  * If you'd like a customizable user, use:
- * @see com.prosilion.scdecisionmatrix.entity.AppUser
+ * @see com.prosilion.scdecisionmatrix.model.entity.AppUser
  *
  * Note: Spring Security using JPA maps this class to "USERS" DB table.
  */

@@ -1,8 +1,8 @@
 package com.prosilion.scdecisionmatrix.config;
 
-import com.prosilion.scdecisionmatrix.repository.AppUserAuthUserRepository;
-import com.prosilion.scdecisionmatrix.security.service.AuthUserDetailServiceImpl;
-import com.prosilion.scdecisionmatrix.security.service.AuthUserDetailsService;
+import com.prosilion.scdecisionmatrix.repository.security.AppUserAuthUserRepository;
+import com.prosilion.scdecisionmatrix.service.security.AuthUserDetailServiceImpl;
+import com.prosilion.scdecisionmatrix.service.security.AuthUserDetailsService;
 import com.prosilion.scdecisionmatrix.service.AppUserAuthUserService;
 import com.prosilion.scdecisionmatrix.service.AppUserService;
 import javax.sql.DataSource;
@@ -22,6 +22,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 public class WebSecurityConfig {
   private static final Logger LOGGER = LoggerFactory.getLogger(WebSecurityConfig.class);
+
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     http.csrf().disable()
@@ -54,6 +55,7 @@ public class WebSecurityConfig {
     return new AppUserAuthUserService(authUserDetailsService, appUserService,
         appUserAuthUserRepository);
   }
+
   @Bean
   public AuthUserDetailsService authUserDetailsService(DataSource dataSource) {
     AuthUserDetailsService authUserDetailsService = new AuthUserDetailServiceImpl(dataSource, passwordEncoder());

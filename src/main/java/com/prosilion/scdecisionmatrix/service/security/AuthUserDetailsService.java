@@ -1,7 +1,7 @@
-package com.prosilion.scdecisionmatrix.security.service;
+package com.prosilion.scdecisionmatrix.service.security;
 
-import com.prosilion.scdecisionmatrix.dto.AppUserDto;
-import com.prosilion.scdecisionmatrix.security.entity.AuthUserDetails;
+import com.prosilion.scdecisionmatrix.model.dto.AppUserDto;
+import com.prosilion.scdecisionmatrix.model.entity.security.AuthUserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 public interface AuthUserDetailsService extends UserDetailsService {

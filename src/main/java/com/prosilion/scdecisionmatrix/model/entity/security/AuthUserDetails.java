@@ -1,4 +1,4 @@
-package com.prosilion.scdecisionmatrix.security.entity;
+package com.prosilion.scdecisionmatrix.model.entity.security;
 
 import org.springframework.security.core.userdetails.UserDetails;
 
