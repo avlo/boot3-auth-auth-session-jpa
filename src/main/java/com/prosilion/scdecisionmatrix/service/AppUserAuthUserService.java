@@ -1,11 +1,11 @@
 package com.prosilion.scdecisionmatrix.service;
 
-import com.prosilion.scdecisionmatrix.entity.AppUser;
-import com.prosilion.scdecisionmatrix.dto.AppUserDto;
-import com.prosilion.scdecisionmatrix.entity.AppUserAuthUser;
-import com.prosilion.scdecisionmatrix.repository.AppUserAuthUserRepository;
-import com.prosilion.scdecisionmatrix.security.entity.AuthUserDetails;
-import com.prosilion.scdecisionmatrix.security.service.AuthUserDetailsService;
+import com.prosilion.scdecisionmatrix.model.entity.AppUser;
+import com.prosilion.scdecisionmatrix.model.dto.AppUserDto;
+import com.prosilion.scdecisionmatrix.model.entity.AppUserAuthUser;
+import com.prosilion.scdecisionmatrix.repository.security.AppUserAuthUserRepository;
+import com.prosilion.scdecisionmatrix.model.entity.security.AuthUserDetails;
+import com.prosilion.scdecisionmatrix.service.security.AuthUserDetailsService;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.NonNull;

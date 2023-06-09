@@ -1,8 +1,8 @@
-package com.prosilion.scdecisionmatrix.security.service;
+package com.prosilion.scdecisionmatrix.service.security;
 
-import com.prosilion.scdecisionmatrix.dto.AppUserDto;
-import com.prosilion.scdecisionmatrix.security.entity.AuthUserDetails;
-import com.prosilion.scdecisionmatrix.security.entity.AuthUserDetailsImpl;
+import com.prosilion.scdecisionmatrix.model.dto.AppUserDto;
+import com.prosilion.scdecisionmatrix.model.entity.security.AuthUserDetails;
+import com.prosilion.scdecisionmatrix.model.entity.security.AuthUserDetailsImpl;
 import javax.sql.DataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

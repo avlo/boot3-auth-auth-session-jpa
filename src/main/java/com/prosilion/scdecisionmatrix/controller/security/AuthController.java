@@ -1,7 +1,7 @@
-package com.prosilion.scdecisionmatrix.security.controller;
+package com.prosilion.scdecisionmatrix.controller.security;
 
-import com.prosilion.scdecisionmatrix.dto.AppUserDto;
-import com.prosilion.scdecisionmatrix.entity.AppUserAuthUser;
+import com.prosilion.scdecisionmatrix.model.dto.AppUserDto;
+import com.prosilion.scdecisionmatrix.model.entity.AppUserAuthUser;
 import com.prosilion.scdecisionmatrix.service.AppUserAuthUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

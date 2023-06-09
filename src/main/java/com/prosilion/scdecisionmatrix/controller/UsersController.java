@@ -1,6 +1,6 @@
 package com.prosilion.scdecisionmatrix.controller;
 
-import com.prosilion.scdecisionmatrix.dto.AppUserDto;
+import com.prosilion.scdecisionmatrix.model.dto.AppUserDto;
 import com.prosilion.scdecisionmatrix.service.AppUserAuthUserService;
 import java.util.List;
 

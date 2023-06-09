@@ -1,7 +1,6 @@
 package com.prosilion.scdecisionmatrix.repository;
 
-import com.prosilion.scdecisionmatrix.entity.AppUser;
-import java.util.Optional;
+import com.prosilion.scdecisionmatrix.model.entity.AppUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
