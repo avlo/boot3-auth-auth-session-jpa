@@ -5,7 +5,7 @@ import com.prosilion.scdecisionmatrix.model.entity.security.AuthUserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 public interface AuthUserDetailsService extends UserDetailsService {
-	void createUser(AppUserDto appUserDto);
+	void createAuthUser(AppUserDto appUserDto);
 	AuthUserDetails loadUserByUsername(String username);
 	AuthUserDetails loadUserByUserDto(AppUserDto appUserDto);
 }

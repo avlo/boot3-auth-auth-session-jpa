@@ -15,12 +15,11 @@ import org.springframework.stereotype.Component;
  *
  * Note: Spring Security using JPA maps this class to "USERS" DB table.
  */
-@Component
 @Scope("session")
-public class AuthUserDetailsImpl implements AuthUserDetails, Serializable {
+public class JdbcAuthUserDetailsImpl implements AuthUserDetails, Serializable {
 
   final private UserDetails user;
-  public AuthUserDetailsImpl(@NonNull UserDetails user) {
+  public JdbcAuthUserDetailsImpl(@NonNull UserDetails user) {
     this.user = user;
   }
 
@@ -66,7 +65,7 @@ public class AuthUserDetailsImpl implements AuthUserDetails, Serializable {
 
   @Override
   public String toString() {
-    return "AuthUserDetailsImpl{" +
+    return "JdbcAuthUserDetailsImpl{" +
         "user=" + user +
         '}';
   }
