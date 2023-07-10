@@ -35,7 +35,7 @@ public class AppUserService {
 	}
 
 //	@Transactional
-//	public AppUser createUser(@NonNull AppUser appUser) {
+//	public AppUser createAuthUser(@NonNull AppUser appUser) {
 //		return appUserRepository.save(authUserDetails.authgetAppUser());
 //	}
 }

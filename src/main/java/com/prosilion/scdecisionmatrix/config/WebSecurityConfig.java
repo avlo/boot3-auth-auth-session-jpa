@@ -1,15 +1,11 @@
 package com.prosilion.scdecisionmatrix.config;
 
-import com.prosilion.scdecisionmatrix.repository.security.AppUserAuthUserRepository;
-import com.prosilion.scdecisionmatrix.service.security.AuthUserDetailServiceImpl;
-import com.prosilion.scdecisionmatrix.service.security.AuthUserDetailsService;
-import com.prosilion.scdecisionmatrix.service.AppUserAuthUserService;
-import com.prosilion.scdecisionmatrix.service.AppUserService;
-import javax.sql.DataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.ldap.core.ContextSource;
+import org.springframework.ldap.core.LdapTemplate;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
@@ -29,7 +25,7 @@ public class WebSecurityConfig {
         .authorizeHttpRequests((authorize) ->
             authorize.requestMatchers("/register/**").permitAll()
                 .requestMatchers("/index").permitAll()
-                .requestMatchers("/users/**").hasRole("USER")
+                .requestMatchers("/users/**")//.hasRole("USER")
         ).formLogin(
             form -> form
                 .loginPage("/login")
@@ -50,20 +46,21 @@ public class WebSecurityConfig {
   }
 
   @Bean
-  public AppUserAuthUserService appUserAuthUserService(AuthUserDetailsService authUserDetailsService,
-      AppUserService appUserService, AppUserAuthUserRepository appUserAuthUserRepository) {
-    return new AppUserAuthUserService(authUserDetailsService, appUserService,
-        appUserAuthUserRepository);
-  }
-
-  @Bean
-  public AuthUserDetailsService authUserDetailsService(DataSource dataSource) {
-    AuthUserDetailsService authUserDetailsService = new AuthUserDetailServiceImpl(dataSource, passwordEncoder());
-    return authUserDetailsService;
-  }
-
-  @Bean
   WebSecurityCustomizer webSecurityCustomizer() {
     return web -> web.ignoring().requestMatchers(new AntPathRequestMatcher("/h2-console/**"));
   }
+
+//  @Autowired
+//  public void configure(AuthenticationManagerBuilder auth) throws Exception {
+//    auth
+//        .ldapAuthentication()
+//        .userDnPatterns("uid={0},ou=people")
+//        .groupSearchBase("ou=groups")
+//        .contextSource()
+//        .url("ldap://localhost:8389/dc=springframework,dc=org")
+//        .and()
+//        .passwordCompare()
+//        .passwordEncoder(passwordEncoder())
+//        .passwordAttribute("userPassword");
+//  }
 }
