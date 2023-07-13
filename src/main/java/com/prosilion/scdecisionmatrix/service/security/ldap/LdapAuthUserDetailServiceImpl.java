@@ -14,8 +14,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ldap.core.AttributesMapper;
 import org.springframework.ldap.core.ContextSource;
-import org.springframework.ldap.core.LdapTemplate;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.ldap.SpringSecurityLdapTemplate;
 import org.springframework.security.ldap.userdetails.LdapUserDetailsManager;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,16 +23,16 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class LdapAuthUserDetailServiceImpl extends LdapUserDetailsManager implements AuthUserDetailsService {
   private static final Logger LOGGER = LoggerFactory.getLogger(LdapAuthUserDetailServiceImpl.class);
-  private final LdapTemplate ldapTemplate;
+  private final SpringSecurityLdapTemplate ldapTemplate;
   @Autowired
-  public LdapAuthUserDetailServiceImpl(ContextSource contextSource, LdapTemplate ldapTemplate) {
+  public LdapAuthUserDetailServiceImpl(ContextSource contextSource, SpringSecurityLdapTemplate ldapTemplate) {
     super(contextSource);
     this.ldapTemplate = ldapTemplate;
-    System.out.println("111111111111111111");
-    System.out.println("111111111111111111");
+    System.out.println("AAAAAAAAAAAAAAAAAA");
+    System.out.println("AAAAAAAAAAAAAAAAAA");
     getAllPersonNames();
-    System.out.println("111111111111111111");
-    System.out.println("111111111111111111");
+    System.out.println("AAAAAAAAAAAAAAAAAA");
+    System.out.println("AAAAAAAAAAAAAAAAAA");
   }
 
   public List<String> getAllPersonNames() {
@@ -45,6 +45,16 @@ public class LdapAuthUserDetailServiceImpl extends LdapUserDetailsManager implem
           }
         });
     System.out.println(users);
+    System.out.println("------------------");
+    List<String> groups = ldapTemplate.search(
+        query().where("objectclass").is("organizationalUnit"),
+        new AttributesMapper<String>() {
+          public String mapFromAttributes(Attributes attrs)
+              throws NamingException {
+            return (String) attrs.get("ou").get();
+          }
+        });
+    System.out.println(groups);
     return users;
   }
 
