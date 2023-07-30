@@ -26,6 +26,7 @@ public class AuthUserServiceImpl implements AuthUserService {
 	}
 
 	@Transactional
+	@Override
 	public AppUserAuthUser createUser(@NonNull AppUserDto appUserDto) {
 		AuthUserDetails savedAuthUserDetails = authUserDetailsService.loadUserByUserDto(appUserDto);
 		AppUser appUser = appUserService.save(new AppUser());

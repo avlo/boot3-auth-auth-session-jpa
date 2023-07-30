@@ -10,6 +10,7 @@ import lombok.NonNull;
 
 public interface AuthUserService {
 
+  AppUserAuthUser createUser(@NonNull AppUserDto appUserDto);
   AppUserAuthUser getAppUserAuthUser(@NonNull AppUser appUser);
 
   AppUserAuthUser getAppUserAuthUser(@NonNull AuthUserDetails authUserDetails);

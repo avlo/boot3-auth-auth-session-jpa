@@ -11,18 +11,16 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class JdbcAuthUserDetailServiceImpl extends JdbcUserDetailsManager implements
-    AuthUserDetailsService {
-  private static final Logger LOGGER = LoggerFactory.getLogger(JdbcAuthUserDetailServiceImpl.class);
+public class AuthUserDetailServiceImpl extends JdbcUserDetailsManager implements AuthUserDetailsService {
+  private static final Logger LOGGER = LoggerFactory.getLogger(AuthUserDetailServiceImpl.class);
   private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-  public JdbcAuthUserDetailServiceImpl(DataSource dataSource, BCryptPasswordEncoder bCryptPasswordEncoder) {
+  public AuthUserDetailServiceImpl(DataSource dataSource, BCryptPasswordEncoder bCryptPasswordEncoder) {
     super(dataSource);
     this.bCryptPasswordEncoder = bCryptPasswordEncoder;
   }
@@ -38,8 +36,6 @@ public class JdbcAuthUserDetailServiceImpl extends JdbcUserDetailsManager implem
 
   @Override
   public AuthUserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    System.out.println("333333333333333333333333");
-    System.out.println("333333333333333333333333");
     return new JdbcAuthUserDetailsImpl(super.loadUserByUsername(username));
   }
 

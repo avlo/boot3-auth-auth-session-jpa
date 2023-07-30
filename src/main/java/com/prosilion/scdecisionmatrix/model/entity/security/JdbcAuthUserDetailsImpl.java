@@ -6,7 +6,6 @@ import lombok.NonNull;
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Component;
 
 /**
  * Authentication & authorization user, directly bound to Spring Security.
