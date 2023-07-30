@@ -2,6 +2,7 @@ package com.prosilion.scdecisionmatrix.service.security.ldap;
 
 import com.prosilion.scdecisionmatrix.model.dto.AppUserDto;
 import com.prosilion.scdecisionmatrix.model.entity.security.AuthUserDetails;
+import com.prosilion.scdecisionmatrix.service.security.jdbc.AuthUserDetailServiceImpl;
 import java.util.Objects;
 import lombok.NonNull;
 import org.slf4j.Logger;
@@ -19,10 +20,10 @@ public class LdapAuthenticationProvider extends AbstractUserDetailsAuthenticatio
 	// TODO: try ActiveDirectoryLdapAuthenticationProvider
 	private static final Logger LOGGER = LoggerFactory.getLogger(LdapAuthenticationProvider.class);
 	private final ActiveDirectoryLdapTemplate activeDirectoryLdapTemplate;
-	private final LdapAuthUserDetailServiceImpl authUserDetailsService;
+	private final AuthUserDetailServiceImpl authUserDetailsService;
 
 	@Autowired
-	public LdapAuthenticationProvider(ActiveDirectoryLdapTemplate activeDirectoryLdapTemplate, LdapAuthUserDetailServiceImpl authUserDetailsService) {
+	public LdapAuthenticationProvider(ActiveDirectoryLdapTemplate activeDirectoryLdapTemplate, AuthUserDetailServiceImpl authUserDetailsService) {
 		this.activeDirectoryLdapTemplate = activeDirectoryLdapTemplate;
 		this.authUserDetailsService = authUserDetailsService;
 	}
