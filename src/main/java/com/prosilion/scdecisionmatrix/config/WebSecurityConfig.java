@@ -1,5 +1,6 @@
 package com.prosilion.scdecisionmatrix.config;
 
+import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
@@ -39,8 +40,16 @@ public class WebSecurityConfig {
   }
 
   @Bean
-  public PasswordEncoder passwordEncoder() {
+  public BCryptPasswordEncoder bCryptPasswordEncoder() {
     return new BCryptPasswordEncoder();
+  }
+
+  @Bean
+  public StandardPBEStringEncryptor standardPBEStringEncryptor() {
+    StandardPBEStringEncryptor standardPBEStringEncryptor = new StandardPBEStringEncryptor();
+    standardPBEStringEncryptor.setAlgorithm("PBEWithMD5AndDES");
+    standardPBEStringEncryptor.setPassword("app-encryption-key");
+    return standardPBEStringEncryptor;
   }
 
   @Bean
