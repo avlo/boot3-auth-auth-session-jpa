@@ -39,8 +39,6 @@ public class LdapAuthUserDetailServiceImpl extends JdbcUserDetailsManager implem
   @Override
   public AuthUserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
     LOGGER.info("Loading LDAP user by username via LdapAuthenticationProvider");
-    System.out.println("55555555555555555555");
-    System.out.println("55555555555555555555");
     return new LdapAuthUserDetailsImpl(super.loadUserByUsername(username));
   }
 
