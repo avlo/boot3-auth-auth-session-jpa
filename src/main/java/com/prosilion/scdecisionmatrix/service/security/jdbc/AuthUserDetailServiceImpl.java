@@ -2,7 +2,7 @@ package com.prosilion.scdecisionmatrix.service.security.jdbc;
 
 import com.prosilion.scdecisionmatrix.model.dto.AppUserDto;
 import com.prosilion.scdecisionmatrix.model.entity.security.AuthUserDetails;
-import com.prosilion.scdecisionmatrix.model.entity.security.JdbcAuthUserDetailsImpl;
+import com.prosilion.scdecisionmatrix.model.entity.security.AuthUserDetailsImpl;
 import com.prosilion.scdecisionmatrix.service.security.AuthUserDetailsService;
 import javax.sql.DataSource;
 import org.slf4j.Logger;
@@ -30,13 +30,13 @@ public class AuthUserDetailServiceImpl extends JdbcUserDetailsManager implements
   public void createAuthUser(AppUserDto appUserDto) {
     UserDetails userDetails = User.withUsername(appUserDto.getUsername()).password(bCryptPasswordEncoder.encode(
         appUserDto.getPassword())).roles("USER").build();
-    AuthUserDetails authUserDetails = new JdbcAuthUserDetailsImpl(userDetails);
+    AuthUserDetails authUserDetails = new AuthUserDetailsImpl(userDetails);
     super.createUser(authUserDetails);
   }
 
   @Override
   public AuthUserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    return new JdbcAuthUserDetailsImpl(super.loadUserByUsername(username));
+    return new AuthUserDetailsImpl(super.loadUserByUsername(username));
   }
 
   @Override
