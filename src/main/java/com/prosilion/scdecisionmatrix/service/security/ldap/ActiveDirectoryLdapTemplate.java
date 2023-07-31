@@ -4,6 +4,7 @@ import javax.naming.directory.SearchControls;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ldap.core.support.LdapContextSource;
 import org.springframework.ldap.filter.AndFilter;
 import org.springframework.ldap.filter.EqualsFilter;
@@ -13,7 +14,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class ActiveDirectoryLdapTemplate extends SpringSecurityLdapTemplate {
 	private static final Logger LOGGER = LoggerFactory.getLogger(ActiveDirectoryLdapTemplate.class);
-	private static final String LDAP_BASE_FOR_DN_USER = "DC=mfad,DC=mfroot,DC=org";
+	@Value("${mayo.ldap.base}")
+	private String LDAP_BASE_FOR_DN_USER;
 	public static final String OBJECT_CLASS = "objectClass";
 	public static final String USER = "user";
 	public static final String CN = "cn";
