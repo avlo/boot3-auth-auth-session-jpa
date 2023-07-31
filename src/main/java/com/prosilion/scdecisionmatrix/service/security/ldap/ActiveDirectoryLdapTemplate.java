@@ -48,11 +48,11 @@ public class ActiveDirectoryLdapTemplate extends SpringSecurityLdapTemplate {
 		return filter;
 	}
 
-	private static SearchControls getSearchControls() {
-		SearchControls controls = new SearchControls();
-		controls.setSearchScope(SearchControls.SUBTREE_SCOPE);
-		String[] attrIDs = { "sn", "givenname", "initials", CN, "uid", "l", "memberOf"};
-		controls.setReturningAttributes(attrIDs);
-		return controls;
-	}
+//	private static SearchControls getSearchControls() {
+//		SearchControls controls = new SearchControls();
+//		controls.setSearchScope(SearchControls.SUBTREE_SCOPE);
+//		String[] attrIDs = { "sn", "givenname", "initials", CN, "uid", "l", "memberOf"};
+//		controls.setReturningAttributes(attrIDs);
+//		return controls;
+//	}
 }
