@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 public class ActiveDirectoryLdapTemplate extends SpringSecurityLdapTemplate {
 	private static final Logger LOGGER = LoggerFactory.getLogger(ActiveDirectoryLdapTemplate.class);
 	@Value("${mayo.ldap.base}")
-	private String LDAP_BASE_FOR_DN_USER;
+	private String MAYO_LDAP_BASE;
 	public static final String OBJECT_CLASS = "objectClass";
 	public static final String USER = "user";
 	public static final String CN = "cn";
@@ -31,7 +31,7 @@ public class ActiveDirectoryLdapTemplate extends SpringSecurityLdapTemplate {
 	protected boolean authenticate(final String lanId, String password) {
 		LOGGER.info("Authenticating via LDAP");
 		try{
-			boolean result = super.authenticate(LDAP_BASE_FOR_DN_USER, getAndFilter(lanId).toString(), password);
+			boolean result = super.authenticate(MAYO_LDAP_BASE, getAndFilter(lanId).toString(), password);
 			LOGGER.info(result ? "LDAP Authentication SUCCESS" : "LDAP Authentication FAILED");
 			return result;
 		} catch(Exception e){
