@@ -25,6 +25,7 @@
     $ mvn spring-boot:run
 
 ## Using application framework
+
 Login & Authenticate LDAP user:
 
     localhost:8080/login
