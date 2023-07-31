@@ -9,7 +9,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
@@ -24,7 +23,7 @@ public class WebSecurityConfig {
         .authorizeHttpRequests((authorize) ->
             authorize.requestMatchers("/register/**").permitAll()
                 .requestMatchers("/index").permitAll()
-                .requestMatchers("/users/**")//.hasRole("USER")
+                .requestMatchers("/users/**").permitAll()//.hasRole("USER")
         ).formLogin(
             form -> form
                 .loginPage("/login")
@@ -56,18 +55,4 @@ public class WebSecurityConfig {
   WebSecurityCustomizer webSecurityCustomizer() {
     return web -> web.ignoring().requestMatchers(new AntPathRequestMatcher("/h2-console/**"));
   }
-
-//  @Autowired
-//  public void configure(AuthenticationManagerBuilder auth) throws Exception {
-//    auth
-//        .ldapAuthentication()
-//        .userDnPatterns("uid={0},ou=people")
-//        .groupSearchBase("ou=groups")
-//        .contextSource()
-//        .url("ldap://localhost:8389/dc=springframework,dc=org")
-//        .and()
-//        .passwordCompare()
-//        .passwordEncoder(passwordEncoder())
-//        .passwordAttribute("userPassword");
-//  }
 }
