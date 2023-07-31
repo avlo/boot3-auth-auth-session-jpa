@@ -15,10 +15,10 @@ import org.springframework.security.core.userdetails.UserDetails;
  * Note: Spring Security using JPA maps this class to "USERS" DB table.
  */
 @Scope("session")
-public class JdbcAuthUserDetailsImpl implements AuthUserDetails, Serializable {
+public class AuthUserDetailsImpl implements AuthUserDetails, Serializable {
 
   final private UserDetails user;
-  public JdbcAuthUserDetailsImpl(@NonNull UserDetails user) {
+  public AuthUserDetailsImpl(@NonNull UserDetails user) {
     this.user = user;
   }
 
@@ -64,7 +64,7 @@ public class JdbcAuthUserDetailsImpl implements AuthUserDetails, Serializable {
 
   @Override
   public String toString() {
-    return "JdbcAuthUserDetailsImpl{" +
+    return "AuthUserDetailsImpl{" +
         "user=" + user +
         '}';
   }
