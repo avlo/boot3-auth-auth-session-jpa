@@ -36,7 +36,7 @@ public class LdapAuthenticationProvider extends AbstractUserDetailsAuthenticatio
 	@Override
 	protected AuthUserDetails retrieveUser(@NonNull String username, @NonNull UsernamePasswordAuthenticationToken authToken) throws AuthenticationException {
 		LOGGER.info("LDAP AuthenticationProvider retrieving user...");
-		if (activeDirectoryLdapTemplate.authenticate(username, authToken.getCredentials().toString())) {
+		if (!activeDirectoryLdapTemplate.authenticate(username, authToken.getCredentials().toString())) {
 			LOGGER.info("Should only reach here if user not in LDAP");
 			throw new BadCredentialsException("User does not exist in LDAP.");
 		}
