@@ -15,6 +15,11 @@
 >     Default locale: en_US, platform encoding: UTF-8
 >     OS name: "linux", version: "5.15.0-72-generic", arch: "amd64", family: "unix"
 
+## Update src/main/resources/application.properties username and password
+
+    spring.ldap.password=<USER_PASSWORD>
+    spring.ldap.username=CN=<USER_ACCOUNT>,OU=Normal,OU=WorkAccounts,DC=mfad,DC=mfroot,DC=org
+
 ## Build and run project
 
     $ mvn spring-boot:run
