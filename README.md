@@ -30,11 +30,11 @@ Login & Authenticate LDAP user:
 
     localhost:8080/login
 
-Register new user:
+Register new application user:
 
     localhost:8080/register
 
-Show existing users (once Authenticated):
+Show existing application users (once LDAP auth/auth'd & app registered):
 
     localhost:8080/users
 
