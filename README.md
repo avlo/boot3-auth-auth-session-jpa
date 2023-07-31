@@ -1,4 +1,4 @@
-# Spring Boot 3.1.2 JPA Hibernate AppUser Creation & LDAP Authentication, Authorizaton &amp; Session Management
+# Spring Boot 3.1.2 JPA application-user creation & session management + LDAP user authentication & authorizaton
 
 ## Requirements
 
@@ -54,7 +54,7 @@ Show all users:
     SELECT * FROM APPUSER;
     SELECT * FROM AUTHORITIES;
 
-## Auto imported dependencies
+## Auto imported dependencies reference
 
     $ mvn dependency:tree
     
