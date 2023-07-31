@@ -9,14 +9,10 @@ import java.util.stream.Collectors;
 import lombok.NonNull;
 
 public interface AuthUserService {
-
   AppUserAuthUser createUser(@NonNull AppUserDto appUserDto);
   AppUserAuthUser getAppUserAuthUser(@NonNull AppUser appUser);
-
   AppUserAuthUser getAppUserAuthUser(@NonNull AuthUserDetails authUserDetails);
-
   List<AppUserAuthUser> getAllAppUsersMappedAuthUsers();
-
   List<AppUserDto> getAllAppUsersAsDto();
 
   default List<AppUserDto> convertAppUserToDto(List<AppUserAuthUser> users) {
