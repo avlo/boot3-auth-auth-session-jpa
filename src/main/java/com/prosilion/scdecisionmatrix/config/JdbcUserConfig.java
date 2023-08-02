@@ -19,15 +19,14 @@ public class JdbcUserConfig {
 	private static final Logger LOGGER = LoggerFactory.getLogger(JdbcUserConfig.class);
 
 	@Bean
-	public AuthUserService jdbcUserAuthUserService(
-			AuthUserDetailServiceImpl authUserDetailServiceImpl, AppUserService appUserService, AppUserAuthUserRepository appUserAuthUserRepository) {
-		LOGGER.info("Loading JDBC - AppUserJdbcUserService");
+	public AuthUserService authUserService(AuthUserDetailServiceImpl authUserDetailServiceImpl, AppUserService appUserService, AppUserAuthUserRepository appUserAuthUserRepository) {
+		LOGGER.info("Loading JDBC - UserService");
 		return new AuthUserServiceImpl(authUserDetailServiceImpl, appUserService, appUserAuthUserRepository);
 	}
 
 	@Bean
-	public UserDetailsService jdbcAuthUserDetailsService(DataSource dataSource, BCryptPasswordEncoder bCryptPasswordEncoder) {
-		LOGGER.info("Loading JDBC - AuthUserDetailServiceImpl");
+	public UserDetailsService userDetailsService(DataSource dataSource, BCryptPasswordEncoder bCryptPasswordEncoder) {
+		LOGGER.info("Loading JDBC - UserDetailService");
 		return new AuthUserDetailServiceImpl(dataSource, bCryptPasswordEncoder);
 	}
 

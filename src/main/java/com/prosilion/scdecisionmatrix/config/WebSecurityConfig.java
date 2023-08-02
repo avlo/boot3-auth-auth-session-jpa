@@ -44,14 +44,6 @@ public class WebSecurityConfig {
   }
 
   @Bean
-  public StandardPBEStringEncryptor standardPBEStringEncryptor() {
-    StandardPBEStringEncryptor standardPBEStringEncryptor = new StandardPBEStringEncryptor();
-    standardPBEStringEncryptor.setAlgorithm("PBEWithMD5AndDES");
-    standardPBEStringEncryptor.setPassword("app-encryption-key");
-    return standardPBEStringEncryptor;
-  }
-
-  @Bean
   WebSecurityCustomizer webSecurityCustomizer() {
     return web -> web.ignoring().requestMatchers(new AntPathRequestMatcher("/h2-console/**"));
   }
