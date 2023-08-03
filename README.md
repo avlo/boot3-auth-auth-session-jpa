@@ -19,7 +19,7 @@
 
     spring.ldap.password=<USER_PASSWORD>
     spring.ldap.username=CN=<USER_ACCOUNT>,OU=Normal,OU=WorkAccounts,DC=mfad,DC=mfroot,DC=org
-    
+
 ## Build and run project
 
     $ mvn spring-boot:run

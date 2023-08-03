@@ -1,11 +1,6 @@
 package com.prosilion.scdecisionmatrix.config;
 
-import com.prosilion.scdecisionmatrix.repository.security.AppUserAuthUserRepository;
-import com.prosilion.scdecisionmatrix.service.security.AuthUserDetailServiceImpl;
-import com.prosilion.scdecisionmatrix.service.security.AuthUserDetailsService;
-import com.prosilion.scdecisionmatrix.service.AppUserAuthUserService;
-import com.prosilion.scdecisionmatrix.service.AppUserService;
-import javax.sql.DataSource;
+import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
@@ -14,7 +9,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
@@ -29,7 +23,7 @@ public class WebSecurityConfig {
         .authorizeHttpRequests((authorize) ->
             authorize.requestMatchers("/register/**").permitAll()
                 .requestMatchers("/index").permitAll()
-                .requestMatchers("/users/**").hasRole("USER")
+                .requestMatchers("/users/**").permitAll()//.hasRole("USER")
         ).formLogin(
             form -> form
                 .loginPage("/login")
@@ -45,21 +39,8 @@ public class WebSecurityConfig {
   }
 
   @Bean
-  public PasswordEncoder passwordEncoder() {
+  public BCryptPasswordEncoder bCryptPasswordEncoder() {
     return new BCryptPasswordEncoder();
-  }
-
-  @Bean
-  public AppUserAuthUserService appUserAuthUserService(AuthUserDetailsService authUserDetailsService,
-      AppUserService appUserService, AppUserAuthUserRepository appUserAuthUserRepository) {
-    return new AppUserAuthUserService(authUserDetailsService, appUserService,
-        appUserAuthUserRepository);
-  }
-
-  @Bean
-  public AuthUserDetailsService authUserDetailsService(DataSource dataSource) {
-    AuthUserDetailsService authUserDetailsService = new AuthUserDetailServiceImpl(dataSource, passwordEncoder());
-    return authUserDetailsService;
   }
 
   @Bean

@@ -17,23 +17,4 @@ public class DatabaseConfig {
 				.addScript(JdbcDaoImpl.DEFAULT_USER_SCHEMA_DDL_LOCATION)
 				.build();
 	}
-
-	// TODO: add external datasource next POC
-//  @Bean
-//  DataSource externalDataSource() {
-//    return new EmbeddedDatabaseBuilder()
-//        .setType(H2)
-//        .addScript(JdbcDaoImpl.DEFAULT_USER_SCHEMA_DDL_LOCATION)
-//        .build();
-//  }
-
-	/*************************************************
-	 * keep this method handy/commented for reference/convenience testing
-	 @Bean
-	 public UserDetailsService inMemoryUserDetailsService() {
-	 UserDetails user =
-	 User.withUsername("user").password(passwordEncoder().encode("userpass")).roles("USER").build();
-	 return new InMemoryUserDetailsManager(user);
-	 }
-	 *************************************************/
 }
