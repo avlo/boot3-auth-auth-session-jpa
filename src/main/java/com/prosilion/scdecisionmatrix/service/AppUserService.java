@@ -2,6 +2,7 @@ package com.prosilion.scdecisionmatrix.service;
 
 import com.prosilion.scdecisionmatrix.model.entity.AppUser;
 import com.prosilion.scdecisionmatrix.repository.AppUserRepository;
+import java.util.Objects;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,17 +22,13 @@ public class AppUserService {
 	}
 
 	public AppUser findByAppUser(@NonNull AppUser appUser) {
-		if (appUser.getId() != null) {
-			return findById(appUser.getId());
-		}
-		return new AppUser();
+		return Objects.isNull(appUser.getId()) ? new AppUser() : findById(appUser.getId());
 	}
 
 	@Transactional
 	public AppUser save(@NonNull AppUser appUser) {
 		AppUser appUserToSave = findByAppUser(appUser);
-		return appUserToSave.getId() != null ? appUserToSave
-				: appUserRepository.save(appUserToSave);
+		return Objects.isNull(appUserToSave.getId()) ? appUserRepository.save(appUserToSave) : appUserToSave;
 	}
 
 //	@Transactional
