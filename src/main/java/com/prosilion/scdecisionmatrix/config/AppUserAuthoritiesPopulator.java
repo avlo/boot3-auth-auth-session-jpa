@@ -19,12 +19,6 @@ public class AppUserAuthoritiesPopulator implements LdapAuthoritiesPopulator {
 	@Override
 	public Collection<? extends GrantedAuthority> getGrantedAuthorities(DirContextOperations userData, String username) {
 		LOGGER.info("Using custom application user authorities, not LDAP");
-		Collection<? extends GrantedAuthority> authorities = authUserDetailsService.loadUserByUsername(username).getAuthorities();
-		System.out.println("1111111111111111111111111");
-		System.out.println("1111111111111111111111111");
-		System.out.println("authorities: " + authorities);
-		System.out.println("1111111111111111111111111");
-		System.out.println("1111111111111111111111111");
-		return authorities;
+		return authUserDetailsService.loadUserByUsername(username).getAuthorities();
 	}
 }
