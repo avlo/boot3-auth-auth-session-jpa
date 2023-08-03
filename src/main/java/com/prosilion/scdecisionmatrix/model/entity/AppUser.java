@@ -1,5 +1,6 @@
 package com.prosilion.scdecisionmatrix.model.entity;
 
+import com.prosilion.scdecisionmatrix.service.security.AuthUserServiceImpl;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,7 +12,7 @@ import lombok.Setter;
 /**
  * Extendable/customizable user, indirectly bound to Spring Security Authentication
  * and Authorization user via join service/table:
- * @see com.prosilion.scdecisionmatrix.service.AppUserAuthUserService
+ * @see AuthUserServiceImpl
  */
 @Getter
 @Setter

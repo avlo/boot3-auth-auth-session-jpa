@@ -1,4 +1,4 @@
-package com.prosilion.scdecisionmatrix.repository.security;
+package com.prosilion.scdecisionmatrix.repository;
 
 import com.prosilion.scdecisionmatrix.model.entity.AppUserAuthUser;
 import java.util.Optional;
