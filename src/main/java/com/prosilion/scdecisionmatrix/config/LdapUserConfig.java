@@ -23,6 +23,14 @@ public class LdapUserConfig {
 	@Value("${ldap.search.base}")
 	private String ldapSearchBase;
 
+	/**
+	 * Bean loaded by Spring Boot (3.1.2 as of this writing) specifying both authentication and authorization/authorities beans.
+	 * It's worth noting 2nd parameter @see com.prosilion.scdecisionmatrix.config.AppUserAuthoritiesPopulator overrides usual Ldap
+	 * authorities mechanism in favor of one supplied by the application itself.
+	 * @param authenticator
+	 * @param authoritiesPopulator
+	 * @return
+	 */
 	@Bean
 	LdapAuthenticationProvider ldapAuthenticationProvider(LdapAuthenticator authenticator, AppUserAuthoritiesPopulator authoritiesPopulator) {
 		LOGGER.info("Loading LDAP - Authentication Provider");
