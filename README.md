@@ -26,13 +26,13 @@
 
 ## Using application framework
 
-Login & Authenticate LDAP user:
-
-    localhost:8080/login
-
 Register new application user:
 
     localhost:8080/register
+    
+Login & Authenticate LDAP user:
+
+    localhost:8080/login
 
 Show existing application users (once LDAP auth/auth'd & app registered):
 
