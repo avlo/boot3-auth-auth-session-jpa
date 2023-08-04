@@ -1,6 +1,5 @@
 package com.prosilion.scdecisionmatrix.config;
 
-import com.prosilion.scdecisionmatrix.controller.UsersController;
 import com.prosilion.scdecisionmatrix.repository.AppUserAuthUserRepository;
 import com.prosilion.scdecisionmatrix.service.AppUserService;
 import com.prosilion.scdecisionmatrix.service.security.AuthUserService;
@@ -28,10 +27,5 @@ public class JdbcUserConfig {
 	public UserDetailsService userDetailsService(DataSource dataSource, BCryptPasswordEncoder bCryptPasswordEncoder) {
 		LOGGER.info("Loading JDBC - UserDetailService");
 		return new AuthUserDetailServiceImpl(dataSource, bCryptPasswordEncoder);
-	}
-
-	@Bean
-	public UsersController authUserController(AuthUserService authUserService) {
-		return new UsersController(authUserService);
 	}
 }
