@@ -1,6 +1,5 @@
 package com.prosilion.scdecisionmatrix.config;
 
-import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
@@ -19,22 +18,20 @@ public class WebSecurityConfig {
 
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-    http.csrf().disable()
-        .authorizeHttpRequests((authorize) ->
-            authorize.requestMatchers("/register/**").permitAll()
-                .requestMatchers("/index").permitAll()
-                .requestMatchers("/users/**").permitAll()//.hasRole("USER")
-        ).formLogin(
-            form -> form
-                .loginPage("/login")
-                .loginProcessingUrl("/loginuser")
-                .defaultSuccessUrl("/users")
-                .permitAll()
-        ).logout(
-            logout -> logout
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .permitAll()
-        );
+    http.authorizeHttpRequests(authorize -> authorize
+        .requestMatchers("/register/**").permitAll()
+        .requestMatchers("/index").permitAll()
+        .requestMatchers("/users/**").hasRole("USER")
+        .anyRequest().authenticated()
+    ).formLogin(form -> form
+        .loginPage("/login")
+        .loginProcessingUrl("/loginuser")
+        .defaultSuccessUrl("/users")
+        .permitAll()
+    ).logout(logout -> logout
+        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+        .permitAll()
+    );
     return http.build();
   }
 
