@@ -1,9 +1,5 @@
 package com.prosilion.scdecisionmatrix.config;
 
-import com.prosilion.scdecisionmatrix.repository.AppUserAuthUserRepository;
-import com.prosilion.scdecisionmatrix.service.AppUserService;
-import com.prosilion.scdecisionmatrix.service.security.AuthUserService;
-import com.prosilion.scdecisionmatrix.service.security.AuthUserServiceImpl;
 import com.prosilion.scdecisionmatrix.service.security.jdbc.AuthUserDetailServiceImpl;
 import javax.sql.DataSource;
 import org.slf4j.Logger;
@@ -16,12 +12,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @Configuration
 public class JdbcUserConfig {
 	private static final Logger LOGGER = LoggerFactory.getLogger(JdbcUserConfig.class);
-
-	@Bean
-	public AuthUserService authUserService(AuthUserDetailServiceImpl authUserDetailServiceImpl, AppUserService appUserService, AppUserAuthUserRepository appUserAuthUserRepository) {
-		LOGGER.info("Loading JDBC - UserService");
-		return new AuthUserServiceImpl(authUserDetailServiceImpl, appUserService, appUserAuthUserRepository);
-	}
 
 	@Bean
 	public UserDetailsService userDetailsService(DataSource dataSource, BCryptPasswordEncoder bCryptPasswordEncoder) {
