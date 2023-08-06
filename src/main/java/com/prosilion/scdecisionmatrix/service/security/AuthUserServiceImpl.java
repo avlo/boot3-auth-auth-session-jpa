@@ -10,14 +10,18 @@ import java.util.List;
 import lombok.NonNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Service
 public class AuthUserServiceImpl implements AuthUserService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(AuthUserServiceImpl.class);
 	private final AppUserAuthUserRepository appUserAuthUserRepository;
 	private final AuthUserDetailsService authUserDetailsService;
 	private final AppUserService appUserService;
 
+	@Autowired
 	public AuthUserServiceImpl(AuthUserDetailsService authUserDetailsService,
 			AppUserService appUserService, AppUserAuthUserRepository appUserAuthUserRepository) {
 		this.authUserDetailsService = authUserDetailsService;
