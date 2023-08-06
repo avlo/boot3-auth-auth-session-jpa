@@ -7,6 +7,7 @@ import com.prosilion.scdecisionmatrix.service.security.AuthUserDetailsService;
 import javax.sql.DataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -20,6 +21,7 @@ public class AuthUserDetailServiceImpl extends JdbcUserDetailsManager implements
   private static final Logger LOGGER = LoggerFactory.getLogger(AuthUserDetailServiceImpl.class);
   private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
+  @Autowired
   public AuthUserDetailServiceImpl(DataSource dataSource, BCryptPasswordEncoder bCryptPasswordEncoder) {
     super(dataSource);
     this.bCryptPasswordEncoder = bCryptPasswordEncoder;
