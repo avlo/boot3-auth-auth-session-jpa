@@ -1,27 +1,19 @@
 
-import com.prosilion.scdecisionmatrix.config.AppUserAuthoritiesPopulator;
-import com.prosilion.scdecisionmatrix.config.DatabaseConfig;
-import com.prosilion.scdecisionmatrix.config.LdapUserConfig;
-import com.prosilion.scdecisionmatrix.config.WebSecurityConfig;
 import com.prosilion.scdecisionmatrix.service.MessageService;
 import com.prosilion.scdecisionmatrix.service.security.jdbc.AuthUserDetailServiceImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.web.WebAppConfiguration;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-@SpringBootTest
-@WebAppConfiguration
-@ContextConfiguration(classes = {WebSecurityConfig.class, DatabaseConfig.class, MessageService.class, AppUserAuthoritiesPopulator.class, LdapUserConfig.class, AuthUserDetailServiceImpl.class})
-@TestPropertySource(locations = "classpath:application-integrationtest.properties")
-@WithMockUser(username="user", password="user", roles={"USER"})
+@ExtendWith(MockitoExtension.class)
 public class MessageServiceTest {
 
-	@Autowired
+	@Mock
+	private AuthUserDetailServiceImpl mockAuthUserDetailService;
+	@InjectMocks
 	private MessageService messageService;
 
 	@Test
