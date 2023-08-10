@@ -1,26 +1,33 @@
 
+import com.prosilion.scdecisionmatrix.ScdecisionmatrixApplication;
 import com.prosilion.scdecisionmatrix.service.MessageService;
 import com.prosilion.scdecisionmatrix.service.security.AuthUserServiceImpl;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.ActiveProfiles;
 
-@SpringBootTest
-//@ContextConfiguration(classes = {AuthUserServiceImpl.class, AuthUserDetailServiceImpl.class})
-@ContextConfiguration(classes = {MessageService.class, AuthUserServiceImpl.class})
-@TestPropertySource(locations = "classpath:application-integrationtest.properties")
+@SpringBootTest(classes = ScdecisionmatrixApplication.class)
+@ActiveProfiles("test")
 @WithMockUser(username="user", password="user", roles={"USER"})
 public class AuthUserServiceImplIT {
 
 //	@Autowired
 //	private WebApplicationContext context;
+//
+//	MockMvc
+//			mockMvc;
 
 	@Autowired
 	private AuthUserServiceImpl authUserService;
+
+	@BeforeEach
+	void setup() {
+
+	}
 
 	@Test
 	public void contextLoads() {
