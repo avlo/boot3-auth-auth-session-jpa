@@ -1,9 +1,8 @@
-
 import com.prosilion.scdecisionmatrix.ScdecisionmatrixApplication;
-import com.prosilion.scdecisionmatrix.service.MessageService;
-import com.prosilion.scdecisionmatrix.service.security.AuthUserServiceImpl;
+import com.prosilion.scdecisionmatrix.model.dto.AppUserDto;
+import com.prosilion.scdecisionmatrix.model.entity.AppUserAuthUser;
+import com.prosilion.scdecisionmatrix.service.security.AuthUserService;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,50 +13,30 @@ import org.springframework.test.context.ActiveProfiles;
 @ActiveProfiles("test")
 @WithMockUser(username="user", password="user", roles={"USER"})
 public class AuthUserServiceImplIT {
-
-//	@Autowired
-//	private WebApplicationContext context;
-//
-//	MockMvc
-//			mockMvc;
-
 	@Autowired
-	private AuthUserServiceImpl authUserService;
-
-	@BeforeEach
-	void setup() {
-
-	}
-
-	@Test
-	public void contextLoads() {
-	}
+	private AuthUserService authUserService;
 
 	@Test
 	public void testCreateUser() {
-//		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//		Assertions.assertNotNull(authentication);
-		Assertions.assertNotNull(authUserService);
+		AppUserDto appUserDto = new AppUserDto();
+		appUserDto.setUsername("test_user");
+		appUserDto.setPassword("test_user_password");
+
+		AppUserAuthUser appUserAuthUser = authUserService.createUser(appUserDto);
+		Assertions.assertNotNull(appUserAuthUser);
+		Assertions.assertEquals(authUserService.getAllAppUsersMappedAuthUsers().size(), 1);
+
+		appUserDto.setUsername("another_test_user");
+		appUserDto.setPassword("another_test_user_password");
+		appUserAuthUser = authUserService.createUser(appUserDto);
+		Assertions.assertNotNull(appUserAuthUser);
+
+		Assertions.assertEquals(authUserService.getAllAppUsersMappedAuthUsers().size(), 2);
 	}
 
 	@Test()
 	public void testGetAllAppUsersAsDto() {
-//		Assertions.assertNotNull(authUserService.getAllAppUsersAsDto());
+		Assertions.assertNotNull(authUserService.getAllAppUsersAsDto());
 	}
 
-	///  FAILSAFE canary
-	@Autowired
-	private MessageService messageService;
-
-	@Test
-	public void testGetSubscriptionMessage() {
-		Assertions.assertEquals(messageService.getSubscriptionMessage(), "TEST MESSAGE");
-	}
-
-	@Test
-	public void testThrowsException() {
-		Assertions.assertThrowsExactly(NumberFormatException.class, () -> {
-			messageService.throwMyException();
-		});
-	}
 }
