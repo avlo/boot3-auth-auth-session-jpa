@@ -23,7 +23,7 @@
 ## Build and run project
 
     $ mvn spring-boot:run
-
+    
 ## Using application framework
 
 Register new application user:
@@ -53,6 +53,24 @@ Show all users:
     SELECT * FROM APPUSER_AUTHUSER;
     SELECT * FROM APPUSER;
     SELECT * FROM AUTHORITIES;
+
+## Build and run unit-tests
+
+    $ mvn test
+
+unit-test code-coverage reports can now be displayed by opening browser file:
+
+    target/site/jacoco/index.html
+    
+_note: for complete code-coverage results, use **mvn verify** command below_
+
+## Build and run both integration-tests and unit-tests
+
+    $ mvn verify
+
+complete (integration-test and unit-test) code-coverage reports can now be displayed by opening browser file:
+
+    target/site/jacoco/index.html
 
 ## Auto imported dependencies reference
 
