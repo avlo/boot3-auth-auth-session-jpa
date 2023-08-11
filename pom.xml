@@ -98,6 +98,25 @@
         </dependency>
     </dependencies>
 
+    <profiles>
+        <profile>
+            <id>ldap</id>
+<!--            PERHAPS HAVE LDAP PROFILE ACTIVATED BY DEFAULT -->
+<!--            <activation>-->
+<!--                <activeByDefault>true</activeByDefault>-->
+<!--            </activation>-->
+            <properties>
+                <spring.profiles.active>ldap</spring.profiles.active>
+            </properties>
+        </profile>
+        <profile>
+            <id>jpa</id>
+            <properties>
+                <spring.profiles.active>jpa</spring.profiles.active>
+            </properties>
+        </profile>
+    </profiles>
+
     <build>
         <plugins>
             <plugin>
@@ -154,6 +173,7 @@
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
+                <filtering>true</filtering> <!-- activates spring profile -->
                 <includes>
                     <include>**/*</include>
                 </includes>
