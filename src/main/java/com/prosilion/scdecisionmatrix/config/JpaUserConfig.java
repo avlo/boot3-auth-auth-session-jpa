@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
-@Profile("jpa")
+@Profile({"jpa", "test"})
 @Configuration
 public class JpaUserConfig {
 	private static final Logger LOGGER = LoggerFactory.getLogger(JpaUserConfig.class);

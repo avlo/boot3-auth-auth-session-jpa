@@ -14,7 +14,7 @@ import org.springframework.security.ldap.authentication.LdapAuthenticationProvid
 import org.springframework.security.ldap.authentication.LdapAuthenticator;
 import org.springframework.security.ldap.search.FilterBasedLdapUserSearch;
 
-@Profile("ldap")
+@Profile({"ldap", "test"})
 @Configuration
 public class LdapUserConfig {
 	private static final Logger LOGGER = LoggerFactory.getLogger(LdapUserConfig.class);
