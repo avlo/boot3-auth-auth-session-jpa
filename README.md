@@ -22,7 +22,16 @@
 
 ## Build and run project
 
-    $ mvn spring-boot:run
+    $ mvn spring-boot:run -Pldap
+    
+or
+
+    $ mvn spring-boot:run -Pjpa
+
+_where -P\<**parameter**\>:_  
+&nbsp;&nbsp;&nbsp;&nbsp;_**ldap** activates LDAP user authentication (but still uses JPA authorization)_  
+  or  
+&nbsp;&nbsp;&nbsp;&nbsp;_**jpa** activates JPA user authentication **and** JPA authorizations (i.e, no LDAP)_  
     
 ## Using application framework
 
