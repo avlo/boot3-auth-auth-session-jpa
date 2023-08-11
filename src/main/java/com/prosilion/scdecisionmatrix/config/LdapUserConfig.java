@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.ldap.core.support.BaseLdapPathContextSource;
 import org.springframework.ldap.filter.AndFilter;
 import org.springframework.ldap.filter.EqualsFilter;
@@ -13,6 +14,7 @@ import org.springframework.security.ldap.authentication.LdapAuthenticationProvid
 import org.springframework.security.ldap.authentication.LdapAuthenticator;
 import org.springframework.security.ldap.search.FilterBasedLdapUserSearch;
 
+@Profile({"ldap", "test"})
 @Configuration
 public class LdapUserConfig {
 	private static final Logger LOGGER = LoggerFactory.getLogger(LdapUserConfig.class);
@@ -33,12 +35,13 @@ public class LdapUserConfig {
 	 */
 	@Bean
 	LdapAuthenticationProvider ldapAuthenticationProvider(LdapAuthenticator authenticator, AppUserAuthoritiesPopulator authoritiesPopulator) {
-		LOGGER.info("Loading LDAP - Authentication Provider");
+		LOGGER.info("Loading LDAP - Authentication Provider (LdapAuthenticationProvider)");
 		return new LdapAuthenticationProvider(authenticator, authoritiesPopulator);
 	}
 
 	@Bean
 	LdapAuthenticator ldapAuthenticator(BaseLdapPathContextSource baseLdapPathContextSource, FilterBasedLdapUserSearch filterBasedLdapUserSearch) {
+		LOGGER.info("Loading LDAP - Authenticator (BindAuthenticator extends AbstractLdapAuthenticator implements LdapAuthenticator)");
 		BindAuthenticator authenticator = new BindAuthenticator(baseLdapPathContextSource);
 		authenticator.setUserSearch(filterBasedLdapUserSearch);
 		authenticator.afterPropertiesSet();
@@ -47,6 +50,7 @@ public class LdapUserConfig {
 
 	@Bean
 	FilterBasedLdapUserSearch filterBasedLdapUserSearch(BaseLdapPathContextSource baseLdapPathContextSource) {
+		LOGGER.info("Loading LDAP - User Search (FilterBasedLdapUserSearch implements LdapUserSearch)");
 		return new FilterBasedLdapUserSearch(ldapSearchBase, getAndFilter(USER_SEARCH_FILTER), baseLdapPathContextSource);
 	}
 
