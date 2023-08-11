@@ -1,5 +1,8 @@
 package com.prosilion.scdecisionmatrix.config;
 
+import com.prosilion.scdecisionmatrix.service.security.AuthUserDetailsService;
+import com.prosilion.scdecisionmatrix.service.security.jdbc.AuthUserDetailServiceImpl;
+import javax.sql.DataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -9,6 +12,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.ldap.core.support.BaseLdapPathContextSource;
 import org.springframework.ldap.filter.AndFilter;
 import org.springframework.ldap.filter.EqualsFilter;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.ldap.authentication.BindAuthenticator;
 import org.springframework.security.ldap.authentication.LdapAuthenticationProvider;
 import org.springframework.security.ldap.authentication.LdapAuthenticator;
@@ -50,6 +54,11 @@ public class LdapUserConfig {
 	@Bean
 	FilterBasedLdapUserSearch filterBasedLdapUserSearch(BaseLdapPathContextSource baseLdapPathContextSource) {
 		return new FilterBasedLdapUserSearch(ldapSearchBase, getAndFilter(USER_SEARCH_FILTER), baseLdapPathContextSource);
+	}
+
+	@Bean
+	public AuthUserDetailsService authUserDetailsService(DataSource dataSource, PasswordEncoder passwordEncoder) {
+		return new AuthUserDetailServiceImpl(dataSource, passwordEncoder);
 	}
 
 	private static String getAndFilter(String distValue) {
