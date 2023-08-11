@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,18 +19,18 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class AuthUserDetailServiceImpl extends JdbcUserDetailsManager implements AuthUserDetailsService {
   private static final Logger LOGGER = LoggerFactory.getLogger(AuthUserDetailServiceImpl.class);
-  private final BCryptPasswordEncoder bCryptPasswordEncoder;
+  private final PasswordEncoder passwordEncoder;
 
   @Autowired
-  public AuthUserDetailServiceImpl(DataSource dataSource, BCryptPasswordEncoder bCryptPasswordEncoder) {
+  public AuthUserDetailServiceImpl(DataSource dataSource, PasswordEncoder passwordEncoder) {
     super(dataSource);
-    this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+    this.passwordEncoder = passwordEncoder;
   }
 
   @Transactional
   @Override
   public void createAuthUser(AppUserDto appUserDto) {
-    UserDetails userDetails = User.withUsername(appUserDto.getUsername()).password(bCryptPasswordEncoder.encode(
+    UserDetails userDetails = User.withUsername(appUserDto.getUsername()).password(passwordEncoder.encode(
         appUserDto.getPassword())).roles("USER").build();
     AuthUserDetails authUserDetails = new AuthUserDetailsImpl(userDetails);
     super.createUser(authUserDetails);
