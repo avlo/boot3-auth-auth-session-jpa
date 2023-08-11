@@ -16,7 +16,6 @@ import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Service
 public class AuthUserDetailServiceImpl extends JdbcUserDetailsManager implements AuthUserDetailsService {
   private static final Logger LOGGER = LoggerFactory.getLogger(AuthUserDetailServiceImpl.class);
   private final PasswordEncoder passwordEncoder;
