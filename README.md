@@ -1,4 +1,8 @@
-# Spring Boot 3.1.2 JPA application-user creation & session management + LDAP user authentication & authorizaton
+# Spring Boot 3.1.2 & Security 6.1.2 application framework with:
+- Customizable app user [JPA/Hibernate] creation & management
+- Pluggable spring-security user authentication & authorization
+- Pluggable LDAP user authentication (atop spring-security authentication & authorization)
+- Spring Security http-request & user session management
 
 ## Requirements
 
@@ -22,16 +26,15 @@
 
 ## Build and run project
 
-    $ mvn spring-boot:run -Pldap
+    $ mvn spring-boot:run
+
+&nbsp;&nbsp;&nbsp;&nbsp;_activates canonical spring-security user mode + spring-security authentication **and** authorization (i.e, no LDAP)_  
     
 or
 
-    $ mvn spring-boot:run -Pjpa
+    $ mvn spring-boot:run -Pldap
 
-_where -P\<**parameter**\>:_  
-&nbsp;&nbsp;&nbsp;&nbsp;_**ldap** activates LDAP user authentication (but still uses JPA authorization)_  
-  or  
-&nbsp;&nbsp;&nbsp;&nbsp;_**jpa** activates JPA user authentication **and** JPA authorizations (i.e, no LDAP)_  
+&nbsp;&nbsp;&nbsp;&nbsp; _activates LDAP user authentication mode (+ spring-security authorization)_  
     
 ## Using application framework
 
