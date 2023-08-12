@@ -78,7 +78,7 @@ _note: for complete code-coverage results, use **mvn verify** command below_
 
 ## Build and run both integration-tests and unit-tests
 
-    $ mvn verify
+    $ mvn verify [-Pldap]
 
 complete (integration-test and unit-test) code-coverage reports can now be displayed by opening browser file:
 
