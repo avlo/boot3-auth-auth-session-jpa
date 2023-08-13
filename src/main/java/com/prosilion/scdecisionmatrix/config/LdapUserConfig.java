@@ -10,10 +10,13 @@ import org.springframework.ldap.core.support.BaseLdapPathContextSource;
 import org.springframework.ldap.filter.AndFilter;
 import org.springframework.ldap.filter.EqualsFilter;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.ldap.authentication.BindAuthenticator;
 import org.springframework.security.ldap.authentication.LdapAuthenticationProvider;
 import org.springframework.security.ldap.authentication.LdapAuthenticator;
 import org.springframework.security.ldap.search.FilterBasedLdapUserSearch;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Profile({"ldap", "test"})
 @Configuration
@@ -26,6 +29,24 @@ public class LdapUserConfig {
 	@Value("${ldap.search.base}")
 	private String ldapSearchBase;
 
+	@Bean
+	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+		LOGGER.info("Loading LDAP - Endpoint authorization configuration");
+		http.authorizeHttpRequests(authorize -> authorize
+				.requestMatchers("/ldap/register").permitAll()
+				.requestMatchers("/users/**").hasRole("USER")
+				.anyRequest().authenticated() // anyRequest() defines a rule chain for any request which did not match the previous rules
+		).formLogin(form -> form
+				.loginPage("/login")
+				.loginProcessingUrl("/loginuser")
+				.defaultSuccessUrl("/users")
+				.permitAll()
+		).logout(logout -> logout
+				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+				.permitAll()
+		);
+		return http.build();
+	}
 	/**
 	 * Bean loaded by Spring Boot Security (6.1.2 as of this writing) specifying both authentication and authorization/authorities beans.
 	 * It's worth noting 2nd parameter @see com.prosilion.scdecisionmatrix.config.AppUserAuthoritiesPopulator overrides usual Ldap

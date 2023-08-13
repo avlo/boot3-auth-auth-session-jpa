@@ -41,7 +41,7 @@ public class JpaAuthController extends AbstractAuthController {
 		} catch (PreExistingUserException e) {
 			LOGGER.info("User [{}] already exists.", appUserDto.getUsername());
 			model.addAttribute("user", appUserDto);
-			return "/register";
+			return "/login";
 		}
 	}
 }
