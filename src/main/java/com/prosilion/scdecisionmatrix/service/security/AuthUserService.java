@@ -1,5 +1,6 @@
 package com.prosilion.scdecisionmatrix.service.security;
 
+import com.prosilion.scdecisionmatrix.PreExistingUserException;
 import com.prosilion.scdecisionmatrix.model.dto.AppUserDto;
 import com.prosilion.scdecisionmatrix.model.entity.AppUser;
 import com.prosilion.scdecisionmatrix.model.entity.AppUserAuthUser;
@@ -10,8 +11,9 @@ import lombok.NonNull;
 
 public interface AuthUserService {
 
-  AppUserAuthUser createUser(@NonNull AppUserDto appUserDto);
-
+  boolean userExists(String userName);
+  AppUserAuthUser createUser(@NonNull AppUserDto appUserDto) throws PreExistingUserException;
+  AuthUserDetails getAppUserAuthUser(@NonNull AppUserDto appUserDto);
   AppUserAuthUser getAppUserAuthUser(@NonNull AppUser appUser);
 
   AppUserAuthUser getAppUserAuthUser(@NonNull AuthUserDetails authUserDetails);

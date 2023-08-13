@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.ldap.core.support.BaseLdapPathContextSource;
 import org.springframework.ldap.filter.AndFilter;
 import org.springframework.ldap.filter.EqualsFilter;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.ldap.authentication.BindAuthenticator;
 import org.springframework.security.ldap.authentication.LdapAuthenticationProvider;
 import org.springframework.security.ldap.authentication.LdapAuthenticator;
@@ -34,7 +35,7 @@ public class LdapUserConfig {
 	 * @return
 	 */
 	@Bean
-	LdapAuthenticationProvider ldapAuthenticationProvider(LdapAuthenticator authenticator, AppUserAuthoritiesPopulator authoritiesPopulator) {
+	AuthenticationProvider ldapAuthenticationProvider(LdapAuthenticator authenticator, AppUserAuthoritiesPopulator authoritiesPopulator) {
 		LOGGER.info("Loading LDAP - Authentication Provider (LdapAuthenticationProvider)");
 		return new LdapAuthenticationProvider(authenticator, authoritiesPopulator);
 	}
@@ -53,6 +54,11 @@ public class LdapUserConfig {
 		LOGGER.info("Loading LDAP - User Search (FilterBasedLdapUserSearch implements LdapUserSearch)");
 		return new FilterBasedLdapUserSearch(ldapSearchBase, getAndFilter(USER_SEARCH_FILTER), baseLdapPathContextSource);
 	}
+
+//	@Bean
+//	AbstractAuthController authController(AuthUserService authUserService, AuthUserDetailsService authUserDetailsService) {
+//		return new LdapAuthController(authUserService, authUserDetailsService);
+//	}
 
 	private static String getAndFilter(String distValue) {
 		AndFilter filter = new AndFilter();

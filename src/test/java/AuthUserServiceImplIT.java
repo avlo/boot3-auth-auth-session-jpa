@@ -1,3 +1,4 @@
+import com.prosilion.scdecisionmatrix.PreExistingUserException;
 import com.prosilion.scdecisionmatrix.ScdecisionmatrixApplication;
 import com.prosilion.scdecisionmatrix.model.dto.AppUserDto;
 import com.prosilion.scdecisionmatrix.model.entity.AppUserAuthUser;
@@ -17,7 +18,7 @@ public class AuthUserServiceImplIT {
 	private AuthUserService authUserService;
 
 	@Test
-	public void testCreateUser() {
+	public void testCreateUser() throws PreExistingUserException {
 		AppUserDto appUserDto = new AppUserDto();
 		appUserDto.setUsername("test_user");
 		appUserDto.setPassword("test_user_password");

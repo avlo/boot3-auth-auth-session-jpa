@@ -1,9 +1,11 @@
 package com.prosilion.scdecisionmatrix.service.security.jdbc;
 
+import com.prosilion.scdecisionmatrix.PreExistingUserException;
 import com.prosilion.scdecisionmatrix.model.dto.AppUserDto;
 import com.prosilion.scdecisionmatrix.model.entity.security.AuthUserDetails;
 import com.prosilion.scdecisionmatrix.model.entity.security.AuthUserDetailsImpl;
 import com.prosilion.scdecisionmatrix.service.security.AuthUserDetailsService;
+import java.text.MessageFormat;
 import javax.sql.DataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,13 +29,20 @@ public class AuthUserDetailServiceImpl extends JdbcUserDetailsManager implements
     this.passwordEncoder = passwordEncoder;
   }
 
+  @Override
+  public boolean userExists(String username) {
+    return super.userExists(username);
+  }
+
   @Transactional
   @Override
-  public void createAuthUser(AppUserDto appUserDto) {
+  public AuthUserDetails createAuthUser(AppUserDto appUserDto) throws PreExistingUserException {
+    if (userExists(appUserDto.getUsername()))
+      throw new PreExistingUserException(MessageFormat.format("User [{}] already exists", appUserDto.getUsername()));
     UserDetails userDetails = User.withUsername(appUserDto.getUsername()).password(passwordEncoder.encode(
         appUserDto.getPassword())).roles("USER").build();
-    AuthUserDetails authUserDetails = new AuthUserDetailsImpl(userDetails);
-    super.createUser(authUserDetails);
+    super.createUser(new AuthUserDetailsImpl(userDetails));
+    return loadUserByUsername(appUserDto.getUsername());
   }
 
   @Override
@@ -42,17 +51,9 @@ public class AuthUserDetailServiceImpl extends JdbcUserDetailsManager implements
   }
 
   @Override
-  public AuthUserDetails loadUserByUserDto(AppUserDto appUserDto) {
-    try {
-      AuthUserDetails authUserDetails = loadUserByUsername(appUserDto.getUsername());
-      LOGGER.info("User found");
-      return authUserDetails;
-    } catch (UsernameNotFoundException u) {
-      LOGGER.info("User not found, try to create new user");
-      createAuthUser(appUserDto);
-      AuthUserDetails authUserDetails= loadUserByUsername(appUserDto.getUsername());
-      LOGGER.info("Created new user");
-      return authUserDetails;
-    }
+  public AuthUserDetails loadUserByUserDto(AppUserDto appUserDto) throws UsernameNotFoundException {
+    AuthUserDetails authUserDetails = loadUserByUsername(appUserDto.getUsername());
+    LOGGER.info("User found");
+    return authUserDetails;
   }
 }

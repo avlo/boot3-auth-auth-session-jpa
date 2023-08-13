@@ -29,13 +29,23 @@ public class AuthUserServiceImpl implements AuthUserService {
 		this.appUserAuthUserRepository = appUserAuthUserRepository;
 	}
 
+	@Override
+	public boolean userExists(String userName) {
+		return authUserDetailsService.userExists(userName);
+	}
+
 	@Transactional
 	@Override
 	public AppUserAuthUser createUser(@NonNull AppUserDto appUserDto) {
-		AuthUserDetails savedAuthUserDetails = authUserDetailsService.loadUserByUserDto(appUserDto);
+		AuthUserDetails savedAuthUserDetails = getAppUserAuthUser(appUserDto);
 		AppUser appUser = appUserService.save(new AppUser());
 		AppUserAuthUser appUserAuthUser = new AppUserAuthUser(appUser.getId(), savedAuthUserDetails.getUsername());
 		return appUserAuthUserRepository.saveAndFlush(appUserAuthUser);
+	}
+
+	@Override
+	public AuthUserDetails getAppUserAuthUser(@NonNull AppUserDto appUserDto) {
+		return authUserDetailsService.loadUserByUserDto(appUserDto);
 	}
 
 	@Override
