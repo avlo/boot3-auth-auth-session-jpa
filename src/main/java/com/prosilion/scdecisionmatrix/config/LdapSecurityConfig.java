@@ -11,6 +11,7 @@ import org.springframework.ldap.filter.AndFilter;
 import org.springframework.ldap.filter.EqualsFilter;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.ldap.authentication.BindAuthenticator;
 import org.springframework.security.ldap.authentication.LdapAuthenticationProvider;
 import org.springframework.security.ldap.authentication.LdapAuthenticator;
@@ -18,8 +19,9 @@ import org.springframework.security.ldap.search.FilterBasedLdapUserSearch;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-@Profile({"ldap", "test"})
+@Profile({"!jpa"})
 @Configuration
+@EnableWebSecurity
 public class LdapSecurityConfig {
 	private static final Logger LOGGER = LoggerFactory.getLogger(LdapSecurityConfig.class);
 	public static final String OBJECT_CLASS = "objectClass";

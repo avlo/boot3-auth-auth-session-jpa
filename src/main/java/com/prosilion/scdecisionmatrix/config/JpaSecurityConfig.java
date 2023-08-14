@@ -14,7 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-@Profile({"jpa", "test"})
+@Profile({"!ldap"})
 @Configuration
 @EnableWebSecurity
 public class JpaSecurityConfig {

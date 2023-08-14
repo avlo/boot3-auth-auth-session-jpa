@@ -1,5 +1,6 @@
 package com.prosilion.scdecisionmatrix.service.security;
 
+import com.prosilion.scdecisionmatrix.PreExistingUserException;
 import com.prosilion.scdecisionmatrix.model.dto.AppUserDto;
 import com.prosilion.scdecisionmatrix.model.entity.AppUser;
 import com.prosilion.scdecisionmatrix.model.entity.AppUserAuthUser;
@@ -33,13 +34,16 @@ public class AuthUserServiceImpl implements AuthUserService {
 
 	@Override
 	public boolean userExists(String userName) {
+		// TODO: this check should use appUserAuthUserRepository
 		return authUserDetailsService.userExists(userName);
 	}
 
 	@Transactional
 	@Override
-	public AppUserAuthUser createUser(@NonNull AppUserDto appUserDto) {
-		AuthUserDetails savedAuthUserDetails = getAppUserAuthUser(appUserDto);
+	public AppUserAuthUser createUser(@NonNull AppUserDto appUserDto) throws PreExistingUserException {
+		if (userExists(appUserDto.getUsername()))
+			throw new PreExistingUserException("THIS SHOULD NOT HAPPEN>  LDAP SHOULD POPULATE USERDETAILS");
+		AuthUserDetails savedAuthUserDetails = authUserDetailsService.createAuthUser(appUserDto);
 		AppUser appUser = appUserService.save(new AppUser());
 		AppUserAuthUser appUserAuthUser = new AppUserAuthUser(appUser.getId(), savedAuthUserDetails.getUsername());
 		return appUserAuthUserRepository.saveAndFlush(appUserAuthUser);
