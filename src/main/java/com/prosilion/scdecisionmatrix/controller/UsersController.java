@@ -24,6 +24,9 @@ public class UsersController {
   @PreAuthorize("authenticated")
   @GetMapping("/users")
   public String users(Model model) {
+    System.out.println("44444444444444444444444");
+    System.out.println("44444444444444444444444");
+    System.out.println("44444444444444444444444");
     List<AppUserDto> users = authUserService.getAllAppUsersAsDto();
     LOGGER.info("Fetched users: {}", users);
     model.addAttribute("users", users);

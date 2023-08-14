@@ -37,8 +37,10 @@ public class AuthUserDetailServiceImpl extends JdbcUserDetailsManager implements
   @Transactional
   @Override
   public AuthUserDetails createAuthUser(AppUserDto appUserDto) throws PreExistingUserException {
-    if (userExists(appUserDto.getUsername()))
+    if (userExists(appUserDto.getUsername())) {
       throw new PreExistingUserException(MessageFormat.format("User [{}] already exists", appUserDto.getUsername()));
+    }
+
     UserDetails userDetails = User.withUsername(appUserDto.getUsername()).password(passwordEncoder.encode(
         appUserDto.getPassword())).roles("USER").build();
     super.createUser(new AuthUserDetailsImpl(userDetails));

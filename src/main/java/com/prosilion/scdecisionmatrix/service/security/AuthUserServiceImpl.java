@@ -6,11 +6,13 @@ import com.prosilion.scdecisionmatrix.model.entity.AppUserAuthUser;
 import com.prosilion.scdecisionmatrix.model.entity.security.AuthUserDetails;
 import com.prosilion.scdecisionmatrix.repository.AppUserAuthUserRepository;
 import com.prosilion.scdecisionmatrix.service.AppUserService;
+import java.util.Collection;
 import java.util.List;
 import lombok.NonNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -63,6 +65,10 @@ public class AuthUserServiceImpl implements AuthUserService {
 		return appUserAuthUserRepository.findAll();
 	}
 
+	@Override
+	public Collection<? extends GrantedAuthority> getGrantedAuthorities(@NonNull String username) {
+		return authUserDetailsService.loadUserByUsername(username).getAuthorities();
+	}
 	/**
 	 * Users for view display
 	 * @return list of all app users
