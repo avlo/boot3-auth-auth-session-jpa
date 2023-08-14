@@ -10,14 +10,16 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Profile({"jpa", "test"})
 @Configuration
 @EnableWebSecurity
-public class JpaUserConfig {
-	private static final Logger LOGGER = LoggerFactory.getLogger(JpaUserConfig.class);
+public class JpaSecurityConfig {
+	private static final Logger LOGGER = LoggerFactory.getLogger(JpaSecurityConfig.class);
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		LOGGER.info("Loading JPA - Endpoint authorization configuration");
@@ -39,8 +41,13 @@ public class JpaUserConfig {
 	}
 
 	@Bean
-	public AuthUserDetailsService authUserDetailsService(DataSource dataSource, AppPasswordEncoder appPasswordEncoder) {
+	public AuthUserDetailsService authUserDetailsService(DataSource dataSource) {
 		LOGGER.info("Loading JPA - AuthUserDetailsService");
-		return new AuthUserDetailServiceImpl(dataSource, appPasswordEncoder.passwordEncoder());
+		return new AuthUserDetailServiceImpl(dataSource, passwordEncoder());
+	}
+
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
 	}
 }

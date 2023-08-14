@@ -20,8 +20,8 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Profile({"ldap", "test"})
 @Configuration
-public class LdapUserConfig {
-	private static final Logger LOGGER = LoggerFactory.getLogger(LdapUserConfig.class);
+public class LdapSecurityConfig {
+	private static final Logger LOGGER = LoggerFactory.getLogger(LdapSecurityConfig.class);
 	public static final String OBJECT_CLASS = "objectClass";
 	public static final String USER_SEARCH_FILTER = "{0}";
 	public static final String DIST_VARIABLE = "cn";
@@ -33,8 +33,6 @@ public class LdapUserConfig {
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		LOGGER.info("Loading LDAP - Endpoint authorization configuration");
 		http.authorizeHttpRequests(authorize -> authorize
-				.requestMatchers("/ldap/register").permitAll()
-				.requestMatchers("/users/**").hasRole("USER")
 				.anyRequest().authenticated() // anyRequest() defines a rule chain for any request which did not match the previous rules
 		).formLogin(form -> form
 				.loginPage("/login")

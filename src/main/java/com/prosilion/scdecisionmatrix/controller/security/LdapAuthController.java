@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Profile({"ldap", "test"})
 @Controller
-@RequestMapping(value = "/ldap")
 public class LdapAuthController extends AbstractAuthController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(LdapAuthController.class);
 	private AuthUserDetailsService authUserDetailsService;

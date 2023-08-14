@@ -10,8 +10,8 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
-public class WebSecurityConfig {
-  private static final Logger LOGGER = LoggerFactory.getLogger(WebSecurityConfig.class);
+public class WebDbConsoleConfig {
+  private static final Logger LOGGER = LoggerFactory.getLogger(WebDbConsoleConfig.class);
 
   @Bean
   WebSecurityCustomizer webSecurityCustomizer() {
