@@ -1,6 +1,6 @@
 # Spring Boot 3.1.2 & Security 6.1.2 application framework
 
-Customizable Spring-security user authentication & authorization framework, with pluggable:
+Customizable Spring Security user authentication & authorization framework, with pluggable:
 
   - Application-DB user creation, authentication & authorization
   - LDAP user authentication (atop spring-security application-DB authorization)
