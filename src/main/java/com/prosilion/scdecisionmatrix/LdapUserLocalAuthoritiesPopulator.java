@@ -1,6 +1,5 @@
-package com.prosilion.scdecisionmatrix.config;
+package com.prosilion.scdecisionmatrix;
 
-import com.prosilion.scdecisionmatrix.PreExistingUserException;
 import com.prosilion.scdecisionmatrix.model.dto.AppUserDto;
 import com.prosilion.scdecisionmatrix.service.security.AuthUserService;
 import java.util.Collection;
@@ -16,12 +15,12 @@ import org.springframework.stereotype.Component;
  * Application authorization/authorities bean serving in place of Ldap authorization/authorities (roles).
  */
 @Component
-public class AppUserAuthoritiesPopulator implements LdapAuthoritiesPopulator {
-	private static final Logger LOGGER = LoggerFactory.getLogger(AppUserAuthoritiesPopulator.class);
+public class LdapUserLocalAuthoritiesPopulator implements LdapAuthoritiesPopulator {
+	private static final Logger LOGGER = LoggerFactory.getLogger(LdapUserLocalAuthoritiesPopulator.class);
 	private final AuthUserService authUserService;
 
 	@Autowired
-	public AppUserAuthoritiesPopulator(AuthUserService authUserService) {
+	public LdapUserLocalAuthoritiesPopulator(AuthUserService authUserService) {
 		this.authUserService = authUserService;
 	}
 
