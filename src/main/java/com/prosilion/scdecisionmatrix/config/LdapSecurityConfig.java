@@ -77,11 +77,6 @@ public class LdapSecurityConfig {
 		return new FilterBasedLdapUserSearch(ldapSearchBase, getAndFilter(USER_SEARCH_FILTER), baseLdapPathContextSource);
 	}
 
-//	@Bean
-//	AbstractAuthController authController(AuthUserService authUserService, AuthUserDetailsService authUserDetailsService) {
-//		return new LdapAuthController(authUserService, authUserDetailsService);
-//	}
-
 	private static String getAndFilter(String distValue) {
 		AndFilter filter = new AndFilter();
 		filter.and(new EqualsFilter(OBJECT_CLASS, USER));
