@@ -1,16 +1,19 @@
 package com.prosilion.scdecisionmatrix.service.security;
 
+import com.prosilion.scdecisionmatrix.PreExistingUserException;
 import com.prosilion.scdecisionmatrix.model.dto.AppUserDto;
 import com.prosilion.scdecisionmatrix.model.entity.AppUser;
 import com.prosilion.scdecisionmatrix.model.entity.AppUserAuthUser;
 import com.prosilion.scdecisionmatrix.model.entity.security.AuthUserDetails;
 import com.prosilion.scdecisionmatrix.repository.AppUserAuthUserRepository;
 import com.prosilion.scdecisionmatrix.service.AppUserService;
+import java.util.Collection;
 import java.util.List;
 import lombok.NonNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,13 +32,26 @@ public class AuthUserServiceImpl implements AuthUserService {
 		this.appUserAuthUserRepository = appUserAuthUserRepository;
 	}
 
+	@Override
+	public boolean userExists(String userName) {
+		// TODO: this check should use appUserAuthUserRepository
+		return authUserDetailsService.userExists(userName);
+	}
+
 	@Transactional
 	@Override
-	public AppUserAuthUser createUser(@NonNull AppUserDto appUserDto) {
-		AuthUserDetails savedAuthUserDetails = authUserDetailsService.loadUserByUserDto(appUserDto);
+	public AppUserAuthUser createUser(@NonNull AppUserDto appUserDto) throws PreExistingUserException {
+		if (userExists(appUserDto.getUsername()))
+			throw new PreExistingUserException("THIS SHOULD NOT HAPPEN>  LDAP SHOULD POPULATE USERDETAILS");
+		AuthUserDetails savedAuthUserDetails = authUserDetailsService.createAuthUser(appUserDto);
 		AppUser appUser = appUserService.save(new AppUser());
 		AppUserAuthUser appUserAuthUser = new AppUserAuthUser(appUser.getId(), savedAuthUserDetails.getUsername());
 		return appUserAuthUserRepository.saveAndFlush(appUserAuthUser);
+	}
+
+	@Override
+	public AuthUserDetails getAppUserAuthUser(@NonNull AppUserDto appUserDto) {
+		return authUserDetailsService.loadUserByUserDto(appUserDto);
 	}
 
 	@Override
@@ -53,6 +69,10 @@ public class AuthUserServiceImpl implements AuthUserService {
 		return appUserAuthUserRepository.findAll();
 	}
 
+	@Override
+	public Collection<? extends GrantedAuthority> getGrantedAuthorities(@NonNull String username) {
+		return authUserDetailsService.loadUserByUsername(username).getAuthorities();
+	}
 	/**
 	 * Users for view display
 	 * @return list of all app users

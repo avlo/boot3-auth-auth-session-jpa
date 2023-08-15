@@ -1,3 +1,4 @@
+import com.prosilion.scdecisionmatrix.PreExistingUserException;
 import com.prosilion.scdecisionmatrix.ScdecisionmatrixApplication;
 import com.prosilion.scdecisionmatrix.model.dto.AppUserDto;
 import com.prosilion.scdecisionmatrix.model.entity.AppUserAuthUser;
@@ -7,17 +8,15 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.context.ActiveProfiles;
 
 @SpringBootTest(classes = ScdecisionmatrixApplication.class) // annotation specififically for INTEGRATION tests
-@ActiveProfiles("test")
 @WithMockUser(username="user", password="user", roles={"USER"})
 public class AuthUserServiceImplIT {
 	@Autowired
 	private AuthUserService authUserService;
 
 	@Test
-	public void testCreateUser() {
+	public void testCreateUser() throws PreExistingUserException {
 		AppUserDto appUserDto = new AppUserDto();
 		appUserDto.setUsername("test_user");
 		appUserDto.setPassword("test_user_password");
@@ -38,5 +37,4 @@ public class AuthUserServiceImplIT {
 	public void testGetAllAppUsersAsDto() {
 		Assertions.assertNotNull(authUserService.getAllAppUsersAsDto());
 	}
-
 }

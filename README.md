@@ -26,7 +26,7 @@
 
 ## Build and run project
 
-    $ mvn spring-boot:run
+    $ mvn spring-boot:run -Pjpa
 
 &nbsp;&nbsp;&nbsp;&nbsp;_activates canonical spring-security user mode + spring-security authentication **and** authorization (i.e, no LDAP)_  
     
@@ -36,11 +36,21 @@ or
 
 &nbsp;&nbsp;&nbsp;&nbsp; _activates LDAP user authentication mode (+ spring-security authorization)_  
     
-## Using application framework
+## Using application framework (JPA mode)
 
 Register new application user:
 
     localhost:8080/register
+    
+Login & Authenticate LDAP user:
+
+    localhost:8080/login
+
+Show existing application users (once LDAP auth/auth'd & app registered):
+
+    localhost:8080/users
+
+## Using application framework (LDAP mode)
     
 Login & Authenticate LDAP user:
 
@@ -78,7 +88,7 @@ _note: for complete code-coverage results, use **mvn verify** command below_
 
 ## Build and run both integration-tests and unit-tests
 
-    $ mvn verify
+    $ mvn verify -P [jpa|ldap]
 
 complete (integration-test and unit-test) code-coverage reports can now be displayed by opening browser file:
 
