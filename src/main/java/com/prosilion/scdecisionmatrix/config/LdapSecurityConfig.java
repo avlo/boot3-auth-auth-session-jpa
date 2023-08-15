@@ -1,5 +1,6 @@
 package com.prosilion.scdecisionmatrix.config;
 
+import com.prosilion.scdecisionmatrix.LdapUserLocalAuthoritiesPopulator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -50,14 +51,14 @@ public class LdapSecurityConfig {
 	}
 	/**
 	 * Bean loaded by Spring Boot Security (6.1.2 as of this writing) specifying both authentication and authorization/authorities beans.
-	 * It's worth noting 2nd parameter @see com.prosilion.scdecisionmatrix.config.AppUserAuthoritiesPopulator overrides usual Ldap
+	 * It's worth noting 2nd parameter @see com.prosilion.scdecisionmatrix.LdapUserLocalAuthoritiesPopulator overrides usual Ldap
 	 * authorities mechanism in favor of one supplied by the application itself.
 	 * @param authenticator
 	 * @param authoritiesPopulator
 	 * @return
 	 */
 	@Bean
-	AuthenticationProvider ldapAuthenticationProvider(LdapAuthenticator authenticator, AppUserAuthoritiesPopulator authoritiesPopulator) {
+	AuthenticationProvider ldapAuthenticationProvider(LdapAuthenticator authenticator, LdapUserLocalAuthoritiesPopulator authoritiesPopulator) {
 		LOGGER.info("Loading LDAP - Authentication Provider (LdapAuthenticationProvider)");
 		return new LdapAuthenticationProvider(authenticator, authoritiesPopulator);
 	}
