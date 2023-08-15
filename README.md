@@ -1,9 +1,13 @@
-# Spring Boot 3.1.2 & Security 6.1.2 application framework with:
-- Customizable app user [JPA/Hibernate] creation & management
-- Pluggable spring-security user authentication & authorization
-- Pluggable LDAP user authentication (atop spring-security authentication & authorization)
-- Pluggable Oauth2/JWT authentication (currently under integration test)
-- Spring Security http-request & user session management
+# Spring Boot 3.1.2 & Security 6.1.2 application framework
+Customizable application app-user creation
+Spring-security user authentication & authorization with pluggable:
+
+  - Application-DB user creation, authentication & authorization
+  - LDAP user authentication (atop spring-security application-DB authorization)
+  - Oauth2/JWT client authentication (currently under integration test)
+    
+Spring Security http-request & user session management
+
 
 ## Requirements
 
