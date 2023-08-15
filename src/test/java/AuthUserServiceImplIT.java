@@ -8,10 +8,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.context.ActiveProfiles;
 
 @SpringBootTest(classes = ScdecisionmatrixApplication.class) // annotation specififically for INTEGRATION tests
-@ActiveProfiles("test")
 @WithMockUser(username="user", password="user", roles={"USER"})
 public class AuthUserServiceImplIT {
 	@Autowired
@@ -39,5 +37,4 @@ public class AuthUserServiceImplIT {
 	public void testGetAllAppUsersAsDto() {
 		Assertions.assertNotNull(authUserService.getAllAppUsersAsDto());
 	}
-
 }

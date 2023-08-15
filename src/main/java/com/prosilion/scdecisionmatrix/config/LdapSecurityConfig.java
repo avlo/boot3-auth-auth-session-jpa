@@ -19,7 +19,7 @@ import org.springframework.security.ldap.search.FilterBasedLdapUserSearch;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-@Profile({"!jpa"})
+@Profile({"ldap"})
 @Configuration
 @EnableWebSecurity
 public class LdapSecurityConfig {
