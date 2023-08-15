@@ -13,7 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-@Profile({"ldap", "test"})
+@Profile({"ldap"})
 @Controller
 public class LdapAuthController extends AbstractAuthController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(LdapAuthController.class);
