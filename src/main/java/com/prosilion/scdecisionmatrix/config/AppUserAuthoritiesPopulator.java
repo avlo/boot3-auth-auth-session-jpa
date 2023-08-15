@@ -13,8 +13,7 @@ import org.springframework.security.ldap.userdetails.LdapAuthoritiesPopulator;
 import org.springframework.stereotype.Component;
 
 /**
- * Application authorization/authorities bean serving in place of Ldap authorization/authorities
- * bean in favor of application specific authorization/authorities (user roles).
+ * Application authorization/authorities bean serving in place of Ldap authorization/authorities (roles).
  */
 @Component
 public class AppUserAuthoritiesPopulator implements LdapAuthoritiesPopulator {
