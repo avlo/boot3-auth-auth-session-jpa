@@ -35,6 +35,7 @@ public class LdapSecurityConfig {
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		LOGGER.info("Loading LDAP - Endpoint authorization configuration");
 		http.authorizeHttpRequests(authorize -> authorize
+				.requestMatchers("/users/**").hasRole("USER")
 				.anyRequest().authenticated() // anyRequest() defines a rule chain for any request which did not match the previous rules
 		).formLogin(form -> form
 				.loginPage("/login")
