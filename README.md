@@ -2,6 +2,7 @@
 - Customizable app user [JPA/Hibernate] creation & management
 - Pluggable spring-security user authentication & authorization
 - Pluggable LDAP user authentication (atop spring-security authentication & authorization)
+- Pluggable Oauth2/JWT authentication (currently under integration test)
 - Spring Security http-request & user session management
 
 ## Requirements
@@ -19,7 +20,7 @@
 >     Default locale: en_US, platform encoding: UTF-8
 >     OS name: "linux", version: "5.15.0-72-generic", arch: "amd64", family: "unix"
 
-## Update src/main/resources/application.properties username and password
+## Update src/main/resources/application.properties username and password (LDAP only)
 
     spring.ldap.password=<USER_PASSWORD>
     spring.ldap.username=CN=<USER_ACCOUNT>,OU=Normal,OU=WorkAccounts,DC=mfad,DC=mfroot,DC=org
@@ -42,11 +43,11 @@ Register new application user:
 
     localhost:8080/register
     
-Login & Authenticate LDAP user:
+Login & Authenticate user:
 
     localhost:8080/login
 
-Show existing application users (once LDAP auth/auth'd & app registered):
+Authenticated and Authorized endpoint displaying existing application users
 
     localhost:8080/users
 
@@ -56,7 +57,7 @@ Login & Authenticate LDAP user:
 
     localhost:8080/login
 
-Show existing application users (once LDAP auth/auth'd & app registered):
+Authenticated and Authorized endpoint displaying existing application users
 
     localhost:8080/users
 
