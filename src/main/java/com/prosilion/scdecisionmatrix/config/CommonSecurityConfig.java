@@ -7,7 +7,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-@Profile({"jpa", "ldap", "test"})
+@Profile({"jpa", "ldap"})
 @Configuration
 @EnableWebSecurity
 public class CommonSecurityConfig {
